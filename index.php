@@ -1,5 +1,5 @@
 <?
-define("URL_BASE", "gfdgd");
+define("URL_BASE", "");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
