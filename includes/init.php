@@ -1,0 +1,3 @@
+<?
+define("URL_BASE", "");
+?>

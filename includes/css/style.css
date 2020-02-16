@@ -1,0 +1,74 @@
+.header{
+    height:105px;
+    width:100%;
+    background-color:#42576f;
+    text-align: center;
+    padding-top: 15px;
+    max-height:200px;    
+}
+.logoFHO{
+    vertical-align: middle;
+}
+.tituloClinica{
+    color:white;
+    font-size:25px;
+    font-family: 'Titillium Web', sans-serif;
+}
+body{
+    margin:0px;
+}
+.separador{
+    height: 30px;
+}
+.container-login{
+    margin-top:90px;
+}
+.texto-centro{
+    display: block;
+    text-align: center;
+}    
+.tituloColorido{
+    color: #42576f;
+}
+.link-clinica{
+    cursor:pointer;
+    border-top: 1px solid rgba(0,0,0,0.3);    
+    padding-top:10px;
+}
+.link-clinica:hover{
+    color:#42576f;
+}
+.link-clinica h4{
+    color:#42576f;
+}
+.formulario-login{
+    padding-left:100px;
+    padding-right:100px;
+}
+.container-clinicas{
+    padding-left:5%;
+}
+.tipo-clinica{
+    text-transform:capitalize;
+}
+.link{
+    color:#337ab7 !important;
+    cursor: pointer;
+}
+.separador-borda{
+    margin-top:15px;
+    border-top: 1px solid rgba(0,0,0,0.3);    
+    margin-bottom:15px;
+}
+.botao{
+    width: 100%;
+    background-color: #337ab7;
+}
+.formulario-esqueceu-senha{
+    display:none;
+    padding-left:100px;
+    padding-right:100px;
+}
+.label-campo{
+    float:left;
+}
