@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="separador"></div>
-    <div class="formulario-cadastro">
+    <form class="formulario-cadastro" method="POST" action="<?= URL_BASE ?>controller.php">
         <div class="row form-group">  
             <div class="col-sm-12 col-md-6 col-lg-6">                       
                 <label for="nome" class="label-campo">Nome completo:</label>
@@ -158,12 +158,27 @@
                 </select>
                 <br>
             </div>   
-        </div>                                                     
+        </div> 
+        <div class="row form-group">  
+            <div class="col-sm-12 col-md-6 col-lg-6">                       
+                <label for="email" class="label-campo">E-mail:</label>
+                <br>
+                <input type="email" name="nome" id="nome" class="form-control campo-formulario campo-texto" placeholder="Digite seu Nome Completo">
+                <br>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">                         
+                <label for="RG" class="label-campo">RG:</label>
+                <br>
+                <input type="text" name="RG" id="RG" class="form-control campo-formulario campo-texto" placeholder="Digite seu RG">
+                <br>
+            </div>
+        </div>                                                            
         <div class="row form-group">
+            <input type="hidden" name="acao" value="cadastrar-usuario-<?= $_GET['formulario'] ?>">
             <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>
         </div>
         <div class="row texto-centro">
-            <a href="index.php" class="link voltar-cadastro">Voltar</a>
+            <a href="../" class="link voltar-cadastro">Voltar</a>
         </div>    
-    </div>
+    </form>
 </div>

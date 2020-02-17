@@ -3,5 +3,4 @@ RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-
+RewriteRule ^cadastro/([a-z]*)$ ./tcc/cadastro.php?formulario=$1
