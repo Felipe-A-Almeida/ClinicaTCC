@@ -7,25 +7,31 @@ class Usuario{
     private $data_nascimento;
     private $naturalidade;
     private $telefone;
-    private $filiacao;
+    private $nomeMae;
+    private $nomePai;
     private $cartaoSUS;
     private $cep;
     private $logradouro;
     private $bairro;
     private $cidade;
     private $estado;
+    private $email;
+    private $senha;
 
-    function __construct($id,$nome,$rg,$cpf,$data_nascimento,$naturalidade,$telefone,$filiacao,$cartaoSUS,$cep,$logradouro,$bairro,$cidade,$estado){
-        $this->id = $id;
+    function __construct($id,$nome,$rg,$cpf,$data_nascimento,$naturalidade,$telefone,$nomePai,$nomeMae,$cartaoSUS,$email,$senha,$cep,$logradouro,$bairro,$cidade,$estado){
+        if($id != "") { $this->id = $id; };
         $this->nome = $nome;
-        $this->rg = $rg;
-        $this->cpf = $cpf;
+        $this->rg = $this->limpaString($rg);
+        $this->cpf = $this->limpaString($cpf);
         $this->data_nascimento = $data_nascimento;
         $this->naturalidade = $naturalidade;
-        $this->telefone = $telefone;
-        $this->filiacao = $filiacao;
-        $this->$cartaoSUS = $cartaoSUS ;
-        $this->cep = $cep;
+        $this->telefone = $this->limpaString($telefone);
+        $this->nomePai = $nomePai;
+        $this->nomeMae = $nomeMae;
+        $this->cartaoSUS = $this->limpaString($cartaoSUS) ;
+        $this->email = $email;
+        $this->senha = $senha;
+        $this->cep = $this->limpaString($cep);
         $this->logradouro = $logradouro;
         $this->bairro = $bairro;
         $this->cidade = $cidade;
@@ -73,13 +79,7 @@ class Usuario{
     }
     public function setTelefone($telefone){
         $this->telefone = $telefone;
-    }
-    public function getFiliacao(){
-        return $this->filiacao;
-    }
-    public function setFiliacao($filiacao){
-        $this->filiacao = $filiacao;
-    }
+    }  
     public function getCartaoSUS(){
         return $this->cartaoSUS;
     }
@@ -112,6 +112,48 @@ class Usuario{
     }
     public function setEstado($estado){
         $this->estado = $estado;
+    }
+    public function getNomeMae(){
+        return $this->nomeMae;
+    }
+    public function setNomeMae($nomeMae){
+        $this->nomeMae = $nomeMae;
+    }
+    public function getNomePai(){
+        return $this->nomePai;
+    }
+    public function setNomePai($nomePai){
+        $this->nomePai = $nomePai;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    public function setEmail($email){
+        $this->email = $email;
+    }
+    public function getSenha(){
+        return md5($this->senha);
+    }
+    public function setSenha($senha){
+        $this->senha = $senha;
+    }
+
+    public function cadastrar($db){
+        $query = "INSERT INTO `usuario` (`nome`,`rg`,`cpf`,`cep`,`logradouro`,`bairro`,`cidade`,`estado`,`naturalidade`,`telefone`,`nomeMae`,`nomePai`,`dataNascimento`,`cartaoSUS`,`senha`,`email`) VALUES ('{$this->getNome()}','{$this->getRG()}','{$this->getCPF()}','{$this->getCEP()}','{$this->getLogradouro()}','{$this->getBairro()}','{$this->getCidade()}','{$this->getEstado()}','{$this->getNaturalidade()}','{$this->getTelefone()}','{$this->getNomeMae()}','{$this->getNomePai()}','{$this->getDataNascimento()}','{$this->getCartaoSUS()}','{$this->getSenha()}','{$this->getEmail()}')";
+        echo $query;
+        $db->inserir($query,$db);
+        
+    }
+    public function limpaString($valor){
+        $valor = trim($valor);
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace(",", "", $valor);
+        $valor = str_replace("-", "", $valor);
+        $valor = str_replace("/", "", $valor);
+        $valor = str_replace("(", "", $valor);
+        $valor = str_replace(")", "", $valor);
+        $valor = str_replace(" ", "", $valor);
+        return $valor;
     }
 }
 ?>

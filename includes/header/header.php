@@ -1,6 +1,8 @@
 <?php
 define("URL_BASE","http://localhost/tcc/");
 define("DIR","C:/xampp/htdocs/tcc/");
+require_once DIR."/classes/DB.php";
+$db = new DB();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

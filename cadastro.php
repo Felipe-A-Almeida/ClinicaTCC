@@ -1,4 +1,7 @@
-<?php require_once("includes/header/header.php"); ?>
+<?php require_once("includes/header/header.php");
+
+
+?>
 <div class="separador"></div>
 <div class="container container-cadastro">
     <div class="row">
@@ -16,7 +19,7 @@
         
         <div class="separador"></div>
         
-        <form class="formulario-cadastro" method="POST" action="<?= URL_BASE ?>controller.php">
+        <form class="formulario-cadastro" method="POST" action="<?= URL_BASE ?>controler/controler.php">
             <div class="row form-group">  
                 <div class="col-sm-12 col-md-6 col-lg-6">                       
                     <label for="nome" class="label-campo">Nome Completo:</label>
@@ -91,15 +94,43 @@
         
             <div class="row form-group"> 
                 <div class="col-sm-12 col-md-6 col-lg-6">                         
-                    <label for="filiacao" class="label-campo">Filiação:</label>
+                    <label for="nomeMae" class="label-campo">Nome da mãe:</label>
                     <br>
-                    <input type="text" name="filiacao" id="filiacao" class="form-control campo-formulario campo-texto" placeholder="Digite o nome da Filiação">
+                    <input type="text" name="nomeMae" id="nomeMae" class="form-control campo-formulario campo-texto" placeholder="Digite o nome da mãe">
                     <br>
                 </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">                         
+                    <label for="nomePai" class="label-campo">Nome do pai:</label>
+                    <br>
+                    <input type="text" name="nomePai" id="nomePai" class="form-control campo-formulario campo-texto" placeholder="Digite o nome do pai">
+                    <br>
+                </div>
+            </div>
+            <div class="row form-group"> 
                 <div class="col-sm-12 col-md-6 col-lg-6">  
                     <label for="cartao-sus" class="label-campo">Cartão SUS:</label>
                     <br>
                     <input type="text" name="cartao-sus" id="cartao-sus" class="form-control campo-formulario campo-texto class-cartaoSUS" placeholder="Digite número do cartão SUS">
+                    <br>
+                </div> 
+                <div class="col-sm-12 col-md-6 col-lg-6">                       
+                    <label for="email" class="label-campo">E-mail:</label>
+                    <br>
+                    <input type="email" name="email" id="email" class="form-control campo-formulario campo-texto" placeholder="Digite seu E-mail">
+                    <br>
+                </div>    
+            </div> 
+            <div class="row form-group"> 
+                <div class="col-sm-12 col-md-6 col-lg-6">  
+                    <label for="senha" class="label-campo">Senha:</label>
+                    <br>
+                    <input type="password" name="senha" id="senha" class="form-control campo-formulario campo-texto senha" placeholder="Digite uma senha para acessar">
+                    <br>
+                </div> 
+                <div class="col-sm-12 col-md-6 col-lg-6">  
+                    <label for="confirmaSenha" class="label-campo">Confirmar Senha:</label>
+                    <br>
+                    <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control campo-formulario campo-texto confirmaSenha" placeholder="Digite novamente sua senha">
                     <br>
                 </div>   
             </div> 
@@ -107,7 +138,7 @@
         </fieldset>
             
         <div class="separador"></div>
-        
+        <hr>
         <fieldset>
         
             <legend>Endereço</legend>
@@ -188,15 +219,7 @@
         </fieldset>
             
         <div class="separador"></div>
-        
-        <div class="row form-group">  
-            <div class="col-sm-12 col-md-6 col-lg-6">                       
-                <label for="email" class="label-campo">E-mail:</label>
-                <br>
-                <input type="email" name="nome" id="nome" class="form-control campo-formulario campo-texto" placeholder="Digite seu Nome Completo">
-                <br>
-            </div>            
-        </div>                                                            
+                                                                  
         <div class="row form-group">
             <input type="hidden" name="acao" value="cadastrar-usuario-<?= $_GET['formulario'] ?>">
             <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>

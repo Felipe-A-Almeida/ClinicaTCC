@@ -8,9 +8,9 @@
                     <span class="tipo-clinica" ng-model="fisioterapia">(fisioterapia)</span>
                 </div>
                 <div class="separador"></div>
-                <div class="formulario-login">
+                <form method="POST" action="<?= URL_BASE ?>controler/controler.php" class="formulario-login">
                     <div class="row form-group">
-                        <input type="text" name="cpf" id="cpf" class="form-control cpf-mask campo-formulario campo-texto " placeholder="Digite seu CPF">
+                        <input type="text" name="cpf-login" id="cpf-login" class="form-control class-cpf campo-formulario campo-texto " placeholder="Digite seu CPF">
                     </div>
                     <div class="row form-group">
                         <input type="password" name="senha" id="senha" class="form-control campo-senha campo-formulario campo-texto" placeholder="Digite sua Senha">
@@ -26,10 +26,10 @@
                         <span>Não possui um cadastro?</span>
                         <br>
                         <a id="link-cadastro" href="cadastro.php?formulario=fisioterapia">
-                            <button class="btn btn-primary botao botao-cadastrar"> Clique aqui para se cadastrar</button>
+                            <button type="button" class="btn btn-primary botao botao-cadastrar"> Clique aqui para se cadastrar</button>
                         </a>
                     </div>                    
-                </div>
+                </form>
                 <div class="formulario-esqueceu-senha">
                     <div class="row form-group texto-centro">                        
                         <input type="email" name="email" id="email" class="form-control campo-formulario campo-texto" placeholder="Digite seu E-mail">
