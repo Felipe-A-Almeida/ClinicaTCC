@@ -72,3 +72,6 @@ body{
 .label-campo{
     float:left;
 }
+.span-required{
+    color: red;
+}

@@ -19,7 +19,22 @@
             setTimeout(function(){
                 $(".formulario-login").fadeIn(200);
             },200);
-        });       
+        });    
+        $(".botao-enviar-email").on("click",function(){
+            if($("#email").val() != "" && validacaoEmail($("#email").val())){
+                var email = $("#email").val();
+                var funcao = "esqueceu-senha";
+                var jqxhr = $.post( "/includes/functions/email.php",{email:email,funcao:funcao}, function() {
+                    alert( "success" );
+                })
+                .done(function() {
+                    alert( "second success" );
+                })
+                .fail(function() {
+                    alert( "error" );
+                });                
+            }
+        });
         $(document).ready(function(){
             $(".class-rg").mask('00.000.000-0', {reverse: true});
             $('.class-cpf').mask('000.000.000-00', {reverse: true});
@@ -35,26 +50,47 @@
             $(".class-cartaoSUS").mask("000.0000.0000.0000");
             $(".class-cep").mask("00000-000");
             $(".class-cep").blur(function(){
-		    var cep = $(this).val().replace(/[^0-9]/, '');
-		    if(cep){
-                var url = 'https://viacep.com.br/ws/' + cep + '/json/';                
-			$.ajax({
-                    url: url,
-                    dataType: 'jsonp',
-                    crossDomain: true,
-                    contentType: "application/json",
-					success : function(json){
+                var cep = $(this).val().replace(/[^0-9]/, '');
+                if(cep){
+                    var url = 'https://viacep.com.br/ws/' + cep + '/json/';                
+                    $.ajax({
+                        url: url,
+                        dataType: 'jsonp',
+                        crossDomain: true,
+                        contentType: "application/json",
+                        success : function(json){
                             $("#logradouro").val(json.logradouro);
                             alert(json.logradouro);
-							$("#bairro").val(json.bairro);
-							$("#cidade").val(json.localidade);
+                            $("#bairro").val(json.bairro);
+                            $("#cidade").val(json.localidade);
                             $("#complemento").val(json.complemento);
                             $("#estado").val(json.uf);
-					}
-			});
-		}					
-	});	
+                        }
+                    });
+                }					
+	        });	
         });
+        function validacaoEmail(field) {
+            usuario = field.value.substring(0, field.value.indexOf("@"));
+            dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+            
+            if ((usuario.length >=1) &&
+                (dominio.length >=3) && 
+                (usuario.search("@")==-1) && 
+                (dominio.search("@")==-1) &&
+                (usuario.search(" ")==-1) && 
+                (dominio.search(" ")==-1) &&
+                (dominio.search(".")!=-1) &&      
+                (dominio.indexOf(".") >=1)&& 
+                (dominio.lastIndexOf(".") < dominio.length - 1)) {
+                    document.getElementById("msgemail").innerHTML="E-mail válido";
+            }
+            else{
+                document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
+                alert("E-mail invalido");
+                return false;
+            }
+        }
     </script>
 </body>
 </html>

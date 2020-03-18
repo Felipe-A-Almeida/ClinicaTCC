@@ -30,8 +30,8 @@
                         </a>
                     </div>                    
                 </form>
-                <div class="formulario-esqueceu-senha">
-                    <div class="row form-group texto-centro">                        
+                <div class="formulario-esqueceu-senha">                    
+                    <div class="row form-group texto-centro">                                            
                         <input type="email" name="email" id="email" class="form-control campo-formulario campo-texto" placeholder="Digite seu E-mail">
                         <br>
                         <div class="row form-group">
