@@ -113,10 +113,41 @@
                     <input type="text" name="cartao-sus" id="cartao-sus" class="form-control campo-formulario campo-texto class-cartaoSUS" placeholder="Digite número do cartão SUS" required>
                     <br>
                 </div> 
-                <div class="col-sm-12 col-md-6 col-lg-6">                       
-                    <label for="email" class="label-campo"><span class="span-required">*</span>E-mail:</label>
+                <div class="col-sm-12 col-md-4 col-lg-4">                       
+                    <label for="profissao" class="label-campo"><span class="span-required">*</span>Profissão:</label>
                     <br>
-                    <input type="email" name="email" id="email" class="form-control campo-formulario campo-texto" placeholder="Digite seu E-mail" required>
+                    <input type="text" name="profissao" id="profissao" class="form-control campo-formulario campo-texto" placeholder="Digite sua Profissão" required>
+                    <br>
+                </div>  
+                <div class="col-sm-12 col-md-2 col-lg-2">                       
+                    <label for="tempoServico" class="label-campo"><span class="span-required">*</span>Tempo de Serviço:</label>
+                    <br>                   
+                    <input type="number" name="tempoServico" id="tempoServico" class="form-control campo-formulario campo-texto class-anos" required>                        
+                    <br>
+                </div>                  
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12 col-md-6 col-lg-6">                       
+                    <label for="sexo" class="label-campo"><span class="span-required">*</span>Sexo:</label>                    
+                    <select name="estado-civil" id="estado-civil" class="form-control campo-formulario campo-texto">Masculino
+                        <option value="">Selecione uma opção...</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outros</option>                        
+                    </select>
+                    <br>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">                       
+                    <label for="estado-civil" class="label-campo"><span class="span-required">*</span>Estado Civil:</label>
+                    <br>
+                    <select name="estado-civil" id="estado-civil" class="form-control campo-formulario campo-texto">Masculino
+                        <option value="">Selecione uma opção...</option>
+                        <option value="solteiro">Solteiro(a)</option>
+                        <option value="casado">Casado(a)</option>
+                        <option value="divorciado">Divorciado(a)</option>
+                        <option value="viuvo">Viúvo(a)</option>
+                        <option value="separado">Separado</option>
+                    </select>
                     <br>
                 </div>    
             </div> 
