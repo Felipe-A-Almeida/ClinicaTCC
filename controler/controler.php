@@ -69,6 +69,7 @@
         $anamnese = new AnamneseFisioterapia($id, $idUsuario,$queixaPrincipal,$inicio,$exercicios,$freqExercicios,$recreacao,$descRecreacao,$doencaFamilia,$tratamentoFamilia);
         $anamnese->inserirFisioterapia($db);
     }
+    
     if(isset($_POST['clinica-consulta-admin'])){
         require_once DIR."/classes/consulta.php";
         $id="";
@@ -84,6 +85,7 @@
         $consulta = new Consulta($id,$idUsuario,$idAluno,$idAdm,$dataInicial,$dataFinal,$idTipoConsulta);        
         $consulta->cadastrarConsulta($db);
     }
+
     function limpaString($valor){
         $valor = trim($valor);
         $valor = str_replace(".", "", $valor);
