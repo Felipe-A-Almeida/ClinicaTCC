@@ -1,6 +1,6 @@
 <?php
-    define("URL_BASE","http://localhost/tcc/");
-    define("DIR","C:/xampp/htdocs/tcc/");
+    define("URL_BASE","http://localhost/clinicaTcc/");
+    define("DIR","C:/xampp/htdocs/clinicaTcc/");
     require_once DIR."/classes/DB.php";
     $db = new DB();    
     if(isset($_POST['nome'])){
@@ -84,6 +84,33 @@
         $idTipoConsulta = $_POST['tipo-consulta'];
         $consulta = new Consulta($id,$idUsuario,$idAluno,$idAdm,$dataInicial,$dataFinal,$idTipoConsulta);        
         $consulta->cadastrarConsulta($db);
+    }
+    if(isset($_POST['clinica-consulta-admin'])){
+        require_once DIR."/classes/consulta.php";
+        $id="";
+        $idUsuario = "";
+        $idAluno = "";
+        $idAdm = 1;
+        $data = $_POST['data'];
+        $hora_inicio = $_POST['hora-inicio'];
+        $hora_fim = $_POST['hora-fim'];
+        $dataInicial = date("Y-m-d",strtotime($data)) . ":" . $hora_inicio;
+        $dataFinal = date("Y-m-d",strtotime($data)) . ":" . $hora_fim;
+        $idTipoConsulta = $_POST['tipo-consulta'];
+        $consulta = new Consulta($id,$idUsuario,$idAluno,$idAdm,$dataInicial,$dataFinal,$idTipoConsulta);        
+        $consulta->cadastrarConsulta($db);
+    }
+    if(isset($_POST['acao']) == "cadastrar-aluno"){
+        require_once DIR."/classes/alunos.php";
+        $id="";
+        $ra = $_POST["ra"];
+        $nome = $_POST["nome_aluno"];
+        $idCurso = $_POST["curso"];
+        $ano = $_POST["ano"];
+        $telefone = limpaString($_POST['telefone']);
+        $aluno = new Aluno($id,$ra,$nome,$idCurso,$ano,$telefone);        
+        $aluno->cadastrarAluno($db);        
+        header("Location: ../admin/cadastro_aluno/");
     }
 
     function limpaString($valor){
