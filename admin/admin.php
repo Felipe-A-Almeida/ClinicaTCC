@@ -42,3 +42,4 @@
 <?php
 require_once DIR."includes/footer/footer.php";
 ?>
+ 
