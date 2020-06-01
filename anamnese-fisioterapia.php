@@ -1,4 +1,11 @@
-<?php require_once("includes/header/header.php");
+<?php 
+require_once "init.php";
+require_once DIR."includes/header/header.php"; 
+require_once DIR."/classes/DB.php";
+require_once DIR."/classes/usuarios.php";
+$usuario = new Usuario("","","","","","","","","","","","","","","","","","","","","","","");
+$usuario->validaSessao($db);
+$id_usuario=$_SESSION['id'];
 
 
 ?>
@@ -39,8 +46,8 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">  
                     <label for="exercicios">Você pratica exercícios físicos?</label>
                     <br>
-                    <input type="radio" name="exercicios" value="nao">Não
-                    <input type="radio" name="exercicios" value="sim">Sim    
+                    <input type="radio" name="exercicios" value="0">Não
+                    <input type="radio" name="exercicios" value="1">Sim    
                     <input type="text" name="freq-exercicios" id="freq-exercicios" class="form-control freq-exercicios" placeholder="Com que frequência">                
                 </div>                                
             </div>
@@ -48,8 +55,8 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">  
                     <label for="recreacao">Você pratica alguma recreação ou lazer?</label>
                     <br>
-                    <input type="radio" name="recreacao" value="nao">Não
-                    <input type="radio" name="recreacao" value="sim">Sim    
+                    <input type="radio" name="recreacao" value="0">Não
+                    <input type="radio" name="recreacao" value="1">Sim    
                     <input type="text" name="freq-recreacao" id="freq-recreacao" class="form-control freq-recreacao" placeholder="Com que frequência">                
                 </div>                                
             </div>                  
@@ -72,6 +79,7 @@
             <div class="row form-group"> 
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <input type="hidden" name="acao" id="acao" value="cadastrar-anamnese-fisioterapia">
+                    <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $usuario->getId(); ?>">
                     <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>
                 </div>                
             </div> 

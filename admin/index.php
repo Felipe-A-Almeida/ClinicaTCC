@@ -1,4 +1,7 @@
-<?php require_once("includes/header/header.php"); ?>
+<?php
+require_once "../init.php";
+require_once DIR."includes/header/header.php";
+?>
     <div class="separador"></div>
     <div class="container container-login">
         <div class="row">
@@ -10,7 +13,7 @@
                 <div class="separador"></div>
                 <form method="POST" action="<?= URL_BASE ?>controler/controler.php" class="formulario-login-admin">
                     <div class="row form-group">
-                        <input type="text" name="cpf-login" id="cpf-login" class="form-control class-cpf campo-formulario campo-texto " placeholder="Digite seu CPF">
+                        <input type="text" name="email" id="email" class="form-control campo-formulario campo-texto " placeholder="Digite seu email">
                     </div>
                     <div class="row form-group">
                         <input type="password" name="senha" id="senha" class="form-control campo-senha campo-formulario campo-texto" placeholder="Digite sua Senha">
@@ -18,6 +21,7 @@
                     <div class="row form-group">
                         <button class="btn btn-primary botao botao-enviar">Acessar</button>
                     </div>
+                    <input type="hidden" name="acao" value="login-admin">
                     <div class="row texto-centro">
                         <span>Esqueceu sua senha?<a class="link esqueceu-senha"> Clique aqui</a></span>
                     </div>

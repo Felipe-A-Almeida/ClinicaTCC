@@ -1,21 +1,78 @@
-<?php 
-require_once "../init.php";
-require_once DIR."includes/header/header.php";
+<?php require_once "init.php";
+require_once DIR."includes/header/header.php"; 
 require_once DIR."/classes/DB.php";
-require_once DIR."/classes/admin.php";
-$admin = new Admin("","","","","");
-$admin->validaSessao($db);
-$query_consultas = "SELECT *,a.id AS idConsulta FROM `consulta` AS `a` INNER JOIN `tipoconsulta` AS `b` ON `a`.`idTipoConsulta` = `b`.`id` WHERE 1";
+require_once DIR."/classes/usuarios.php";
+$usuario = new Usuario("","","","","","","","","","","","","","","","","","","","","","","");
+$usuario->validaSessao($db);
+$id_usuario=$_SESSION['id'];
+$query_consultas = "SELECT `a`.`id` AS `id`, `a`.`data_inicio` AS `data_inicio`,`a`.`data_fim` AS `data_fim`,`b`.`descricao` AS `descricao` FROM `consulta` AS `a` INNER JOIN `tipoconsulta` AS `b` ON `a`.`idTipoConsulta` = `b`.`id` WHERE `a`.`idUsuario` = '$id_usuario'";
 $result = $db->consultar($query_consultas,$db);
 while($ln = $result->fetch_assoc()){
-    $response[] = array("title"=>$ln['descricao'],"start"=>$ln['data_inicio'],"end"=>$ln['data_fim'],"id"=>$ln['idConsulta']);
+    $response[] = array("title"=>$ln['descricao'],"start"=>$ln['data_inicio'],"end"=>$ln['data_fim'],"id"=>$ln['id']);
 }    
-$json = json_encode($response);
-include_once "menu.php";
+if(isset($response)){
+    $json = json_encode($response);
+}else{
+    $response[] = array("title"=>"","start"=>"","end"=>"","id"=>"");
+    $json = json_encode($response);
+}
+
+$query_anamnsese_fisioterapia = "SELECT `idUsuario` FROM `anamnesefisio` WHERE `idUsuario` = ".$usuario->getId();
+$mensagem_anamnese_fisio = 0;
+$result_anamnese_fisioterapia = $db->consultar($query_anamnsese_fisioterapia,$db);
+if($result_anamnese_fisioterapia->num_rows == 0) $mensagem_anamnese_fisio = 1;
+$query_anamnsese_enfermagem = "SELECT `idUsuario` FROM `anamneseenfermagem` WHERE `idUsuario` = ".$usuario->getId();
+$mensagem_anamnese_enfermagem = 0;
+$result_anamnese_enfermagem = $db->consultar($query_anamnsese_enfermagem,$db);
+if($result_anamnese_enfermagem->num_rows == 0) $mensagem_anamnese_enfermagem = 1;
+include_once "includes/header/menu.php";
 ?>
 
 <div class="separador"></div>
 <div class="container">
+    <?php if($mensagem_anamnese_fisio){  ?>
+    <div class="aviso">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <span class="titulo-aviso">Atenção!!!</span>                
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <span class="conteudo-aviso">Você ainda não preencheu a sua ficha de pré-atendimento de Fisioterapia. Clique no botão abaixo para preencher.</span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <a href="anamnese-fisioterapia.php"><button  class="btn btn-primary botao">Clique aqui para preencher</button></a>
+            </div>
+        </div>
+    </div>    
+    <br>
+    <?php } ?>
+    <?php if($mensagem_anamnese_enfermagem){  ?>
+    <div class="aviso">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <span class="titulo-aviso">Atenção!!!</span>                
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <span class="conteudo-aviso">Você ainda não preencheu a sua ficha de pré-atendimento de Enfermagem. Clique no botão abaixo para preencher.</span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <a href="anamnese-enfermagem.php"><button  class="btn btn-primary botao">Clique aqui para preencher</button></a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <?php } ?>
+    <div class="separador"></div>
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-8">
             <div id="calendario">            
@@ -35,7 +92,7 @@ include_once "menu.php";
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <h3>Cadastrar Consulta</h3>
-                                <h6  id="tipo_clinica">(Fisioterapia)</h6>
+                                <h6 id="tipo_clinica">(Fisioterapia)</h6>
                             </div>
                         </div>
                         <div class="row">
@@ -73,29 +130,11 @@ include_once "menu.php";
                                 </div>                                
                             </div>
                         </div>
-                        <br>
+                        <br>                                             
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label for="nome_paciente">Nome do Paciente</label>
-                                <select id="paciente" name="paciente" class="form-control" required>
-                                    <option value="">Selecione um usuário</option>
-                                    <?php                              
-                                        $query_pacientes = "SELECT * FROM `usuario` WHERE 1" ;
-                                        $result_pacientes = $db->consultar($query_pacientes,$db);    
-                                        while($ln_pacientes = $result_pacientes->fetch_assoc()){ 
-                                    ?>
-                                        <option value="<?= $ln_pacientes['id'] ?>"><?= $ln_pacientes['nome']; ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                            <input type="hidden" name="clinica-consulta-admin" class="form-control campo-texto" value="fisioterapia">
-                                <input type="hidden" name="acao" value="clinica-consulta-admin">
+                                <input type="hidden" name="clinica-consulta-usuario" value="fisioterapia">
+                                <input type="hidden" name="acao" value="cadastrar-consulta-usuario">
                                 <input type="hidden" name="usuario" class="form-control campo-texto" value="<?php echo $_SESSION['id']; ?>">
                                 <input type="submit" name="cadastrar-consulta" class="btn btn-primary botao" value="Cadastrar">
                             </div>
@@ -150,7 +189,7 @@ include_once "menu.php";
                                 <button class="btn btn-danger botao" id="cancelar-editar">Cancelar consulta</button>  
                                 <br>      
                                 <input type="hidden" name="clinica-consulta-usuario" value="fisioterapia">
-                                <input type="hidden" name="acao" value="editar-consulta-admin">
+                                <input type="hidden" name="acao" value="editar-consulta-usuario">
                                 <input type="hidden" id="idConsulta" name="idConsulta">
                                 <input type="hidden" name="usuario" class="form-control campo-texto" value="<?php echo $_SESSION['id']; ?>">
                                 <br>
@@ -164,23 +203,22 @@ include_once "menu.php";
     </div>
 </div>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<link href='../../includes/fullCalendar/packages/core/main.css' rel='stylesheet' />
-<link href='../../includes/fullCalendar/packages/daygrid/main.css' rel='stylesheet' />
-<link href='../../includes/fullCalendar/packages/timegrid/main.css' rel='stylesheet' />
+<link href='includes/fullCalendar/packages/core/main.css' rel='stylesheet' />
+<link href='includes/fullCalendar/packages/daygrid/main.css' rel='stylesheet' />
+<link href='includes/fullCalendar/packages/timegrid/main.css' rel='stylesheet' />
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<script src='../../includes/fullCalendar/packages/core/main.js'></script>
-<script src='../../includes/fullCalendar/packages/daygrid/main.js'></script>
-<script src='../../includes/fullCalendar/packages/timegrid/main.js'></script>
-<script src='../../includes/fullCalendar/packages/core/locales/pt-br.js'></script>
-<script src='../../includes/fullCalendar/packages/interaction/main.js'></script>
+<script src='includes/fullCalendar/packages/core/main.js'></script>
+<script src='includes/fullCalendar/packages/daygrid/main.js'></script>
+<script src='includes/fullCalendar/packages/timegrid/main.js'></script>
+<script src='includes/fullCalendar/packages/core/locales/pt-br.js'></script>
+<script src='includes/fullCalendar/packages/interaction/main.js'></script>
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    clinica = $("#tipo_clinica").html();
+    document.addEventListener('DOMContentLoaded', function() {
     $("#periodo").on("change",function(){
         periodo = $(this).val();
         clinica = $("#tipo_clinica").html();
@@ -210,7 +248,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     if($(".cadastro-consulta").is(':visible')){
                         $(".cadastrar-consulta").click();
                         setTimeout(function(){$(".cadastrar-consulta").click()},500);                           
-                    }                    
+                    }
+                    $.post("getConsultas.php",{tipo:"Fisioterapia",id_usuario: <?php echo $id_usuario * 4801000 ?>},function(data){
+                        var obj = jQuery.parseJSON(data);
+                        var eventSources = calendar.getEventSources(); 
+                        var len = eventSources.length;
+                        for (var i = 0; i < len; i++) { 
+                            eventSources[i].remove(); 
+                        } 
+                        $(obj).each(function(){
+                            calendar.addEvent(this); 
+                        })
+                    });
                 }
             },
             Enfermagem: {
@@ -221,12 +270,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     if($(".cadastro-consulta").is(':visible')){
                         $(".cadastrar-consulta").click();
                         setTimeout(function(){$(".cadastrar-consulta").click()},500);
-                    }                    
+                    }
+                    $.post("getConsultas.php",{tipo:"Enfermagem",id_usuario: <?php echo $id_usuario * 4801000 ?>},function(data){
+                        var obj = jQuery.parseJSON(data);
+                        var eventSources = calendar.getEventSources(); 
+                        var len = eventSources.length;
+                        for (var i = 0; i < len; i++) {
+                            eventSources[i].remove(); 
+                        }
+                        calendar.addEvent(obj); 
+                    });
                 }                
             }
         },
         events:<?php echo $json; ?>,
         dayClick: function() {
+            alert("FOI");
         },
         eventClick: function(info) {
             editarConsulta(info.event.id);
@@ -250,10 +309,10 @@ document.addEventListener('DOMContentLoaded', function() {
             $(".cadastro-consulta").show(500);
             clinica = $("#tipo_clinica").html();
             periodo = $("#periodo").val();
-            $.post("../../getPeriodo.php",{periodo:periodo,clinica:clinica},function(data){
+            $.post("getPeriodo.php",{periodo:periodo,clinica:clinica},function(data){
                 $("#horario").html(data);
             });
-            $.post("../../getTipoConsulta.php",{clinica:clinica},function(data){
+            $.post("getTipoConsulta.php",{clinica:clinica},function(data){
                 $("#tipo-consulta").html(data);
             });
         }
@@ -268,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#cancelar-editar").on("click",function(){
         if(confirm("Tem certeza que deseja cancelar a consulta?")){
             id = $("#idConsulta").val();
-            $.post("../../controler/controler.php",{idConsulta:id,acao:"excluir-consulta"},function(){
+            $.post("controler/controler.php",{idConsulta:id,acao:"excluir-consulta"},function(){
                 return 1;
             });
         }else{
@@ -276,18 +335,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     function getHorario(periodo,clinica){        
-        $.post("../../getPeriodo.php",{periodo:periodo,clinica:clinica},function(data){
+        $.post("getPeriodo.php",{periodo:periodo,clinica:clinica},function(data){
             $("#horario").html(data);
         });
     }
     function getEditHorario(periodo,clinica,horario){        
-        $.post("../../getPeriodo.php",{periodo:periodo,clinica:clinica,horario:horario},function(data){
+        $.post("getPeriodo.php",{periodo:periodo,clinica:clinica,horario:horario},function(data){
             $("#editar-horario").html(data);            
         });
     }
     function editarConsulta(id){
         $.ajax({
-            url: '../../getConsulta.php',
+            url: 'getConsulta.php',
             type: 'POST',
             data: {id:id},
             dataType: 'JSON',
@@ -295,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 $("#editar-data").val(data[0].data_inicio) ;  
                 $("#editar-periodo").val(data[0].periodo) ;
                 getEditHorario(data[0].periodo,data[0].clinica,data[0].horario);
-                $.post("../../getTipoConsulta.php",{clinica:data[0].clinica,tipo:data[0].idTipo},function(data){
+                $.post("getTipoConsulta.php",{clinica:data[0].clinica,tipo:data[0].idTipo},function(data){
                     $("#editar-tipo-consulta").html(data);
                 });
                 $("#editar-tipo-consulta").val(data[0].idTipo);

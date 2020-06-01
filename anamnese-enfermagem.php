@@ -1,4 +1,11 @@
-<?php require_once("includes/header/header.php");
+<?php 
+require_once "init.php";
+require_once DIR."includes/header/header.php"; 
+require_once DIR."/classes/DB.php";
+require_once DIR."/classes/usuarios.php";
+$usuario = new Usuario("","","","","","","","","","","","","","","","","","","","","","","");
+$usuario->validaSessao($db);
+$id_usuario=$_SESSION['id'];
 
 
 ?>
@@ -152,6 +159,7 @@
             <div class="row form-group"> 
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <input type="hidden" name="acao" id="acao" value="cadastrar-anamnese-enfermagem">
+                    <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $usuario->getId(); ?>">
                     <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>
                 </div>                
             </div> 

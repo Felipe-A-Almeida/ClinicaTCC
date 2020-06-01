@@ -66,6 +66,16 @@ class Consulta{
         echo $query;
         $db->inserir($query,$db);
     }
+    public function editarConsulta($db){
+        $query = "UPDATE `consulta` SET `idUsuario`='{$this->getIdUsuario()}',`idAluno` = '{$this->getIdAluno()}',`idAdm` ='{$this->getIdAdm()}',`data_inicio` = '{$this->getDataInicio()}',`data_fim` = '{$this->getDataFim()}',`idTipoConsulta` = '{$this->getIdTipoConsulta()}',`resultado` = '' WHERE `id` = '{$this->getId()}'";
+        echo $query;
+        $db->inserir($query,$db);
+    }
+    public function excluirConsulta($db){
+        $query = "DELETE  FROM `consulta` WHERE `id` = '{$this->getId()}'";
+        echo $query;
+        $db->inserir($query,$db);
+    }
     
 }
 

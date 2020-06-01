@@ -1,4 +1,6 @@
-<?php require_once("includes/header/header.php"); ?>
+<?php require_once "init.php";
+require_once DIR."includes/header/header.php";
+ ?>
     <div class="separador"></div>
     <div class="container container-login">
         <div class="row">
@@ -25,6 +27,7 @@
                     <div class="row texto-centro">
                         <span>Não possui um cadastro?</span>
                         <br>
+                        <input type="hidden" name="acao" value="cadastrar-consulta-usuario">
                         <a id="link-cadastro" href="cadastro.php?formulario=fisioterapia">
                             <button type="button" class="btn btn-primary botao botao-cadastrar"> Clique aqui para se cadastrar</button>
                         </a>

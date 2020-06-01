@@ -566,6 +566,41 @@ class AnamneseEnfermagem{
         echo $query;
         $db->inserir($query,$db);
     }
-
+    public function editarAnamnese($db){
+    $query = "UPDATE `anamneseenfermagem` SET `queixaPrincipal` = '{$this->getQueixaPrincipal()}',`inicio` = '{$this->getInicio()}',`doenca` = '{$this->getDoenca()}',`descDoenca` = '{$this->getDescDoenca()}',`alergia` = '{$this->getAlergia()}',`descAlergia` = '{$this->getDescAlergia()}',`medicamento` = '{$this->getMedicamento()}',`descMedicamento` = '{$this->getDescMedicamento()}',`fumo` = '{$this->getFumo()}',`freqFumo` = '{$this->getFreqFumo()}',`drogas` = '{$this->getDrogas()}',`freqDrogas` = '{$this->getFreqDrogas()}',`bebidas` = '{$this->getBebidas()}',`freqBebidas` = '{$this->getFreqBebidas()}',`exercicios` = '{$this->getExercicios()}',`freqExercicios` = '{$this->getFreqExercicios()}',`recreacao` = '{$this->getRecreacao()}',`descRecreacao` = '{$this->getDescRecreacao()}',`animais` = '{$this->getAnimais()}',`descAnimais` = '{$this->getdescAnimais()}',`postos` = '{$this->getPostos()}',`doencaFamilia` = '{$this->getDoencaFamilia()}',`tratamentoFamilia` = '{$this->getTratamentoFamilia()}' WHERE `idUsuario` = {$this->getIdUsuario()}";
+        echo $query;
+        $db->editar($query,$db);
+    }
+    public function setAnamnese($id,$db){
+        $query = "SELECT * FROM `anamneseenfermagem` WHERE `idUsuario` = $id";
+        $result = $db->consultar($query,$db);
+        if($ln = $result->fetch_assoc()){
+            $this->setId($ln['id']);
+            $this->setIdUsuario($ln['idUsuario']);
+            $this->setQueixaPrincipal($ln['queixaPrincipal']);
+            $this->setInicio($ln['inicio']);
+            $this->setDoenca($ln['doenca']);
+            $this->setDescDoenca($ln['descDoenca']);
+            $this->setAlergia($ln['alergia']);
+            $this->setDescAlergia($ln['descAlergia']);
+            $this->setMedicamento($ln['medicamento']);
+            $this->setDescMedicamento($ln['descMedicamento']);
+            $this->setFumo($ln['fumo']);
+            $this->setFreqFumo($ln['freqFumo']);
+            $this->setDrogas($ln['drogas']);
+            $this->setFreqDrogas($ln['freqDrogas']);
+            $this->setBebidas($ln['bebidas']);
+            $this->setFreqBebidas($ln['freqBebidas']);
+            $this->setExercicios($ln['exercicios']);
+            $this->setFreqExercicios($ln['freqExercicios']);
+            $this->setRecreacao($ln['recreacao']);
+            $this->setDescRecreacao($ln['descRecreacao']);
+            $this->setAnimais($ln['animais']);
+            $this->setDescAnimais($ln['descAnimais']);
+            $this->setPostos($ln['postos']);
+            $this->setDoencaFamilia($ln['doencaFamilia']);
+            $this->setTratamentoFamilia($ln['tratamentoFamilia']);
+        }
+    }
     
 }

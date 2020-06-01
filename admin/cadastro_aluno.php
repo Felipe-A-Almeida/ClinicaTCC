@@ -1,8 +1,12 @@
 <?php
-require_once("../includes/header/header.php");
+require_once "../init.php";
+require_once DIR."includes/header/header.php";
 require_once DIR."/classes/DB.php";
 include_once "menu.php";
 $ano_atual = date("Y");
+require_once DIR."/classes/admin.php";
+$admin = new Admin("","","","","");
+$admin->validaSessao($db);
 ?>
 
 <div class="separador"></div>
@@ -72,7 +76,7 @@ $ano_atual = date("Y");
                 </div>
                 <div class="separador"></div>                                                                  
                 <div class="row">
-                    <input type="hidden" name="acao" value="cadastrar-aluno">
+                    <input type="hidden" name="acao" value="cadastrar-aluno-admin">
                     <button class="btn btn-primary botao botao-enviar-aluno">Cadastrar</button>
                 </div>
             </form>

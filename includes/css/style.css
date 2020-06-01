@@ -101,6 +101,33 @@ body{
 .cadastro-consulta{
     display: none;
 }
+.editar-consulta{
+    display:none;
+    width:100%;
+}
+#div-botao-cancelar{
+    display:none;
+}
+#cancelar-editar{
+    background-color: #c11d1d;
+}
 .fc-button-primary{
     background-color: #337ab7 !important;
+}
+.aviso{
+    border:3px solid lightgray;
+    border-radius:10px;
+    padding:25px;    
+}
+.titulo-aviso{
+    font-weight: 600;
+    font-size: 22px;
+    color:black
+}
+.conteudo-aviso{
+    color:#525252;
+    font-size:18px;
+}
+.form-editar{
+    display: none;
 }

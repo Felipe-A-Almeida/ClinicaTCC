@@ -235,7 +235,27 @@ class AnamneseFisioterapia{
 
     public function inserirFisioterapia($db){
         $query = "INSERT INTO `anamnesefisio` (`id`,`idUsuario`,`queixaPrincipal`,`inicio`,`exercicios`,`descExercicios`,`recreacao`,`descRecreacao`,`doencasFamilia`,`tratamentoFamilia`) VALUES ('{$this->getId()}','{$this->getIdUsuario()}','{$this->getQueixaPrincipal()}','{$this->getInicio()}','{$this->getExercicios()}','{$this->getFreqExercicios()}','{$this->getRecreacao()}','{$this->getDescRecreacao()}','{$this->getDoencaFamilia()}','{$this->getTratamentoFamilia()}')";
-        echo $query;
         $db->inserir($query,$db);
+    }
+    public function setAnamnese($id,$db){
+        $query = "SELECT * FROM `anamnesefisio` WHERE `idUsuario` = $id";
+        $result = $db->consultar($query,$db);
+        if($ln = $result->fetch_assoc()){
+            $this->setId($ln['id']);
+            $this->setIdUsuario($ln['idUsuario']);
+            $this->setQueixaPrincipal($ln['queixaPrincipal']);
+            $this->setInicio($ln['inicio']);
+            $this->setExercicios($ln['exercicios']);
+            $this->setFreqExercicios($ln['descExercicios']);
+            $this->setRecreacao($ln['recreacao']);
+            $this->setDescRecreacao($ln['descRecreacao']);
+            $this->setDoencaFamilia($ln['doencasFamilia']);
+            $this->setTratamentoFamilia($ln['tratamentoFamilia']);
+        }
+    }
+    public function editarAnamnese($db){
+        $query = "UPDATE `anamnesefisio` SET `queixaPrincipal` = '{$this->getQueixaPrincipal()}',`inicio` = '{$this->getInicio()}',`exercicios` = '{$this->getExercicios()}',`descExercicios` = '{$this->getFreqExercicios()}',`recreacao` = '{$this->getRecreacao()}',`descRecreacao` = '{$this->getDescRecreacao()}',`doencasFamilia` = '{$this->getDoencaFamilia()}',`tratamentoFamilia` = '{$this->getTratamentoFamilia()}' WHERE `idUsuario` = {$this->getIdUsuario()}";
+        echo $query;
+        $db->editar($query,$db);
     }
 }

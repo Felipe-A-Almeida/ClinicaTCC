@@ -21,6 +21,12 @@ class DB{
     public function inserir($query, $sql){
         $sql->sql->query($query);
     }
+    public function excluir($query, $sql){
+        $sql->sql->query($query);
+    }
+    public function editar($query,$sql){
+        $sql->sql->query($query);
+    }
     public function consultar($query, $sql){
         $result = $sql->sql->query($query);
         return $result; 
