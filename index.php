@@ -4,10 +4,10 @@ require_once DIR."includes/header/header.php";
     <div class="separador"></div>
     <div class="container container-login">
         <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="row texto-centro">
                     <h1 class="tituloColorido">Acesso ao Sistema</h1>
-                    <span class="tipo-clinica" ng-model="fisioterapia">(fisioterapia)</span>
+                    <span>Preencha os campos abaixo para acessar o sistema</span>
                 </div>
                 <div class="separador"></div>
                 <form method="POST" action="<?= URL_BASE ?>controler/controler.php" class="formulario-login">
@@ -27,7 +27,7 @@ require_once DIR."includes/header/header.php";
                     <div class="row texto-centro">
                         <span>Não possui um cadastro?</span>
                         <br>
-                        <input type="hidden" name="acao" value="cadastrar-consulta-usuario">
+                        <input type="hidden" name="acao" value="login">
                         <a id="link-cadastro" href="cadastro.php?formulario=fisioterapia">
                             <button type="button" class="btn btn-primary botao botao-cadastrar"> Clique aqui para se cadastrar</button>
                         </a>
@@ -37,36 +37,22 @@ require_once DIR."includes/header/header.php";
                     <div class="row form-group texto-centro">                                            
                         <input type="email" name="email" id="email" class="form-control campo-formulario campo-texto" placeholder="Digite seu E-mail">
                         <br>
-                        <div class="row form-group">
+                        <div class="row form-group row-botao-enviar-email">
                             <button class="btn btn-primary botao botao-enviar-email">Enviar E-mail</button>
+                        </div>
+                        <div class="row form-group row-spinner-enviar-email">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="row texto-centro">
                             <a class="link voltar-esqueci-senha">Voltar</a>
                         </div>
                     </div>
                 </div>
-            </div>                      
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="row texto-centro">
-                    <h1 class="tituloColorido">Selecione a Clínica Desejada</h1>
-                </div>
-                <div class="separador"></div>
-                <div class="container-clinicas">
-                    <div class="row link-clinica">
-                        <a class="link-fisioterapia">
-                            <h4>Clínica de Fisioterapia</h4>
-                            <span>Clique aqui para acessar a clínica de fisioterapia</span>
-                        </a>
-                    </div>
-                    <div class="separador"></div>
-                    <div class="row link-clinica">
-                        <a class="link-enfermagem">
-                            <h4>Clínica de Enfermagem</h4>
-                            <span>Clique aqui para acessar a clínica de enfermagem</span>
-                        </a>
-                    </div>
-                </div>
-            </div>      
+            </div>                                        
         </div>
     </div>    
     <div class="separador"></div>

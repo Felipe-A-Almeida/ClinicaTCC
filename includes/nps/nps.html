@@ -1,0 +1,84 @@
+<div class="div-nps">
+    <div class="separador"></div>
+    <div class="separador"></div>
+    <div class="separador"></div>
+    <div class="container container-nps">
+        <form action="controler/controler.php" method="POST">
+            <div class="row">
+                <h1>Avaliação do Sistema</h1>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <p class="titulo">
+                        Como foi sua experiência com o sistema?
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <label for="nota-utilidade-0" class="label-nota-nps-0 label-nota-nps">0</label>                
+                    <label for="nota-utilidade-1" class="label-nota-nps-1 label-nota-nps">1</label> 
+                    <label for="nota-utilidade-2" class="label-nota-nps-2 label-nota-nps">2</label>         
+                    <label for="nota-utilidade-3" class="label-nota-nps-3 label-nota-nps">3</label> 
+                    <label for="nota-utilidade-4" class="label-nota-nps-4 label-nota-nps">4</label> 
+                    <label for="nota-utilidade-5" class="label-nota-nps-5 label-nota-nps">5</label> 
+                    <label for="nota-utilidade-6" class="label-nota-nps-6 label-nota-nps">6</label> 
+                    <label for="nota-utilidade-7" class="label-nota-nps-7 label-nota-nps">7</label> 
+                    <label for="nota-utilidade-8" class="label-nota-nps-8 label-nota-nps">8</label> 
+                    <label for="nota-utilidade-9" class="label-nota-nps-9 label-nota-nps">9</label> 
+                    <label for="nota-utilidade-10" class="label-nota-nps-10 label-nota-nps label-nota-nps-selecionado">10</label> 
+                </div>
+            </div>
+            <div class="row botoes-nps">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-0" class="nota-utilidade" value="0">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-1" class="nota-utilidade" value="1">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-2" class="nota-utilidade" value="2">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-3" class="nota-utilidade" value="3">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-4" class="nota-utilidade" value="4">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-5" class="nota-utilidade" value="5">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-6" class="nota-utilidade" value="6">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-7" class="nota-utilidade" value="7">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-8" class="nota-utilidade" value="8">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-9" class="nota-utilidade" value="9">
+                <input type="radio" name="nota-utilidade" id="nota-utilidade-10" class="nota-utilidade" value="10" checked>         
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <p class="titulo">
+                        Deixe abaixo algum comentário ou sugestão sobre o sistema:
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <textarea class="form-control" id="comentario-nps"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <button type="button" class="btn btn-primary botao-envia-nps">ENVIAR</button>
+                    <button type="button" class="btn btn-danger botao-pula-nps">PULAR</button>
+                    <input type="hidden" name="idUsuario" value="<?= $id_usuario ?>" hidden>
+                    <input type="submit" id="envia-nps" hidden>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="div-agradecimento-nps">
+    <div class="separador"></div>
+    <div class="separador"></div>
+    <div class="separador"></div>
+    <div class="separador"></div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <h1>Obrigado pela avaliação!</h1>
+        </div>
+    </div>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

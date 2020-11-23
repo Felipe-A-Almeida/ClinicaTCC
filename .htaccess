@@ -4,7 +4,7 @@ RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^cadastro/([a-z]*)$ ./clinicaTcc/cadastro.php?formulario=$1
-RewriteRule ^admin/cadastro_aluno/$ ./clinicaTcc/admin/cadastro_aluno.php
-RewriteRule ^admin/calendario/$ ./clinicaTcc/admin/main.php
-RewriteRule ^admin/cadastro_funcionario/$ ./clinicaTcc/admin/cadastro_funcionario.php
+RewriteRule ^admin/aluno/$ ./clinicaTcc/admin/cadastro_aluno.php
+RewriteRule ^admin/calendario/([a-z]*)$ ./clinicaTcc/admin/main.php?clinica=$1
+RewriteRule ^admin/funcionario/$ ./clinicaTcc/admin/cadastro_funcionario.php
 RewriteRule ^sair/$ ./clinicaTcc/sair.php

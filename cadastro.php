@@ -8,8 +8,8 @@ require_once DIR."includes/header/header.php";
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="row texto-centro">
-                <h1 class="tituloColorido">Acesso ao Sistema</h1>
-                <span class="tipo-clinica">(<?= $_GET['formulario'] ?>)</span>
+                <h1 class="tituloColorido">Cadastrar</h1>
+                <span>Preencha os campos abaixo para completar o cadastro</span>
             </div>
         </div>
     </div>
@@ -162,17 +162,24 @@ require_once DIR."includes/header/header.php";
                 <div class="col-sm-12 col-md-6 col-lg-6">  
                     <label for="senha" class="label-campo"><span class="span-required">*</span>Senha:</label>
                     <br>
-                    <input type="password" name="senha" id="senha" class="form-control campo-formulario campo-texto senha" placeholder="Digite uma senha para acessar" required>
+                    <input type="password" name="senha" id="senha-cadastro" class="form-control campo-formulario campo-texto senha-cadastro" placeholder="Digite uma senha para acessar" required>
                     <br>
+                    <span><i>A senha deve conter pelo menos 6 caracteres e pelo menos 1 número</i></span>
                 </div> 
                 <div class="col-sm-12 col-md-6 col-lg-6">  
                     <label for="confirmaSenha" class="label-campo"><span class="span-required">*</span>Confirmar Senha:</label>
                     <br>
-                    <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control campo-formulario campo-texto confirmaSenha" placeholder="Digite novamente sua senha" required>
+                    <input type="password" name="confirmaSenha" id="confirmaSenha-cadastro" class="form-control campo-formulario campo-texto confirmaSenha-cadastro" placeholder="Digite novamente sua senha" required>
                     <br>
                 </div>   
             </div> 
-            
+            <div id="erro-senha" class="row form-group">
+                <div class="alert alert-danger" role="alert">
+                    <span class="erro-senha">A senhas digitadas não correspondem ou são inválidas</span>
+                    <input type="hidden" name="acao" value="envia-nova-senha">
+                    <input type="hidden" name="token" value="<?= $token ?>">
+                </div>
+            </div>
         </fieldset>
             
         <div class="separador"></div>
@@ -265,14 +272,16 @@ require_once DIR."includes/header/header.php";
         <div class="separador"></div>
                                                                   
         <div class="row form-group">
-            <input type="hidden" name="acao-cadastro" value="cadastrar-usuario-<?= $_GET['formulario'] ?>">
             <input type="hidden" name="acao" value="cadastrar-usuario">
-            <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>
+            <button class="btn btn-primary botao botao-enviar-cadastro" id="botao-enviar-cadastro">Cadastrar</button>
         </div>
         <div class="row texto-centro">
-            <a href="../" class="link voltar-cadastro">Voltar</a>
+            <a href="<?= URL_BASE ?>" class="link voltar-cadastro">Voltar</a>
         </div>    
     </form>
 </div>
+<div class="separador"></div>
+
+<div class="separador"></div>
 
 <?php require_once("includes/footer/footer.php"); ?>

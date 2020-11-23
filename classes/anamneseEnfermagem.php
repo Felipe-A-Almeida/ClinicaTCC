@@ -101,7 +101,7 @@ class AnamneseEnfermagem{
 
         return $this;
     }
-
+    
     /**
      * Get the value of queixaPrincipal
      */ 
@@ -562,12 +562,12 @@ class AnamneseEnfermagem{
     }
 
     public function inserirEnfermagem($db){
-        $query = "INSERT INTO `anamneseenfermagem` (`id`,`idUsuario`,`queixaPrincipal`,`inicio`,`doenca`,`descDoenca`,`alergia`,`descAlergia`,`medicamento`,`descMedicamento`,`fumo`,`freqFumo`,`drogas`,`freqDrogas`,`bebidas`,`freqBebidas`,`exercicios`,`freqExercicios`,`recreacao`,`descRecreacao`,`animais`,`descAnimais`,`postos`,`doencaFamilia`,`tratamentoFamilia`) VALUES ('{$this->getId()}','{$this->getIdUsuario()}','{$this->getQueixaPrincipal()}','{$this->getInicio()}','{$this->getDoenca()}','{$this->getDescDoenca()}','{$this->getAlergia()}','{$this->getDescAlergia()}','{$this->getMedicamento()}','{$this->getDescMedicamento()}','{$this->getFumo()}','{$this->getFreqFumo()}','{$this->getDrogas()}','{$this->getFreqDrogas()}','{$this->getBebidas()}','{$this->getFreqBebidas()}','{$this->getExercicios()}','{$this->getFreqExercicios()}','{$this->getRecreacao()}','{$this->getDescRecreacao()}','{$this->getAnimais()}','{$this->getdescAnimais()}','{$this->getPostos()}','{$this->getDoencaFamilia()}','{$this->getTratamentoFamilia()}')";
+        $query = "INSERT INTO `anamneseenfermagem` (`id`,`idUsuario`,`queixaPrincipal`,`inicio`,`doenca`,`descDoenca`,`alergia`,`descAlergia`,`medicamento`,`descMedicamento`,`fumo`,`freqFumo`,`drogas`,`freqDrogas`,`bebidas`,`freqBebidas`,`exercicios`,`freqExercicios`,`recreacao`,`descRecreacao`,`animais`,`descAnimais`,`postos`,`doencaFamilia`,`tratamentoFamilia`) VALUES ('{$this->getId()}','{$this->getIdUsuario()}','{$this->getIdConsulta()}','{$this->getQueixaPrincipal()}','{$this->getInicio()}','{$this->getDoenca()}','{$this->getDescDoenca()}','{$this->getAlergia()}','{$this->getDescAlergia()}','{$this->getMedicamento()}','{$this->getDescMedicamento()}','{$this->getFumo()}','{$this->getFreqFumo()}','{$this->getDrogas()}','{$this->getFreqDrogas()}','{$this->getBebidas()}','{$this->getFreqBebidas()}','{$this->getExercicios()}','{$this->getFreqExercicios()}','{$this->getRecreacao()}','{$this->getDescRecreacao()}','{$this->getAnimais()}','{$this->getdescAnimais()}','{$this->getPostos()}','{$this->getDoencaFamilia()}','{$this->getTratamentoFamilia()}')";
         echo $query;
         $db->inserir($query,$db);
     }
     public function editarAnamnese($db){
-    $query = "UPDATE `anamneseenfermagem` SET `queixaPrincipal` = '{$this->getQueixaPrincipal()}',`inicio` = '{$this->getInicio()}',`doenca` = '{$this->getDoenca()}',`descDoenca` = '{$this->getDescDoenca()}',`alergia` = '{$this->getAlergia()}',`descAlergia` = '{$this->getDescAlergia()}',`medicamento` = '{$this->getMedicamento()}',`descMedicamento` = '{$this->getDescMedicamento()}',`fumo` = '{$this->getFumo()}',`freqFumo` = '{$this->getFreqFumo()}',`drogas` = '{$this->getDrogas()}',`freqDrogas` = '{$this->getFreqDrogas()}',`bebidas` = '{$this->getBebidas()}',`freqBebidas` = '{$this->getFreqBebidas()}',`exercicios` = '{$this->getExercicios()}',`freqExercicios` = '{$this->getFreqExercicios()}',`recreacao` = '{$this->getRecreacao()}',`descRecreacao` = '{$this->getDescRecreacao()}',`animais` = '{$this->getAnimais()}',`descAnimais` = '{$this->getdescAnimais()}',`postos` = '{$this->getPostos()}',`doencaFamilia` = '{$this->getDoencaFamilia()}',`tratamentoFamilia` = '{$this->getTratamentoFamilia()}' WHERE `idUsuario` = {$this->getIdUsuario()}";
+        $query = "UPDATE `anamneseenfermagem` SET `queixaPrincipal` = '{$this->getQueixaPrincipal()}',`inicio` = '{$this->getInicio()}',`doenca` = '{$this->getDoenca()}',`descDoenca` = '{$this->getDescDoenca()}',`alergia` = '{$this->getAlergia()}',`descAlergia` = '{$this->getDescAlergia()}',`medicamento` = '{$this->getMedicamento()}',`descMedicamento` = '{$this->getDescMedicamento()}',`fumo` = '{$this->getFumo()}',`freqFumo` = '{$this->getFreqFumo()}',`drogas` = '{$this->getDrogas()}',`freqDrogas` = '{$this->getFreqDrogas()}',`bebidas` = '{$this->getBebidas()}',`freqBebidas` = '{$this->getFreqBebidas()}',`exercicios` = '{$this->getExercicios()}',`freqExercicios` = '{$this->getFreqExercicios()}',`recreacao` = '{$this->getRecreacao()}',`descRecreacao` = '{$this->getDescRecreacao()}',`animais` = '{$this->getAnimais()}',`descAnimais` = '{$this->getdescAnimais()}',`postos` = '{$this->getPostos()}',`doencaFamilia` = '{$this->getDoencaFamilia()}',`tratamentoFamilia` = '{$this->getTratamentoFamilia()}' WHERE `idUsuario` = {$this->getIdUsuario()}";
         echo $query;
         $db->editar($query,$db);
     }

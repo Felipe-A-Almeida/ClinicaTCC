@@ -22,11 +22,15 @@ body{
 }
 .container-login{
     margin-top:90px;
+    max-width: 700px;
 }
 .texto-centro{
     display: block;
     text-align: center;
 }    
+.fechar-notificacao{
+    cursor: pointer;
+}
 .tituloColorido{
     color: #42576f;
 }
@@ -76,14 +80,19 @@ body{
     color: red;
 }
 .formulario-login-admin{
-    padding-left: 350px;
-    padding-right:350px;
+    padding-left: 100px;
+    padding-right:100px;
 }
 .menu-item{
     position: relative;
     float: left;
     width: 250px;
     font-size: 17px;
+    color: #777;
+}
+.menu-item:hover{
+    text-decoration: underline;
+    color: #333;
 }
 .menu-horizontal{
     list-style-type: none;
@@ -99,6 +108,7 @@ body{
     vertical-align: middle;
 }
 .cadastro-consulta{
+    width: 100%;
     display: none;
 }
 .editar-consulta{
@@ -128,6 +138,137 @@ body{
     color:#525252;
     font-size:18px;
 }
-.form-editar{
+
+.div-fisioterapia{
     display: none;
+}
+.div-enfermagem{
+    display: none;
+}
+#erro-senha{
+    display: none;
+}
+#erro-senha .alert{
+    width: 100%;
+    text-align: center;
+}
+.container-recupera-senha{
+    width:20%;
+}
+#div-botoes-clinica{
+    text-align: center;
+}
+.botao-clinica{
+    font-size:35px;
+    padding:10px;
+}
+#div-botoes-clinica h1{
+    width: 100%;
+}
+.conteudo-modal{
+    padding: 30px;
+}
+.adireita{
+    float: right;
+}
+.btn-primary{
+    background-color: #337ab7;
+}
+.modal-backdrop{
+    opacity:0.7 !important;
+}
+#anamnese-fisioterapia-body,#anamnese-enfermagem-body,#modal-body-avalia-consulta{
+    display:none;
+}
+.form-editar-fisioterapia,.form-editar-enfermagem{
+    padding: 55px;
+    padding-top:25px;
+}
+#tabela-consultas{
+    width: 90% !important;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.ui-autocomplete{
+    z-index: 1050 !important;
+}
+.ui-menu{
+    border-radius: 5px;
+    padding:5px;
+}
+.label-nota-nps{
+    padding:10px;
+    border: 0px solid black;
+    width: 50px;
+    text-align: center;
+    border-radius:10px;
+    font-size: 20px;
+    font-weight: 700;
+    color:white;
+}
+.div-nps,.div-agradecimento-nps{
+    display:none;
+}
+.container-nps{
+    text-align: center;
+    width: 50%;
+}
+.container-nps h1{
+    width: 100%;
+}
+.label-nota-nps-0{
+    background-color:#990000;    
+}
+.label-nota-nps-1{
+    background-color:#990000;    
+}
+.label-nota-nps-2{
+    background-color:#990000;    
+}
+.label-nota-nps-3{
+    background-color:#990000;    
+}
+.label-nota-nps-4{
+    background-color:#990000;    
+}
+.label-nota-nps-5{
+    background-color:#990000;    
+}
+.label-nota-nps-6{
+    background-color:#990000;    
+}
+.label-nota-nps-7{
+    background-color: #e6b800;    
+}
+.label-nota-nps-8{
+    background-color: #e6b800;    
+}
+.label-nota-nps-9{
+    background-color:#009933;    
+}
+.label-nota-nps-10{
+    background-color:#009933;    
+}
+.nota-utilidade{
+    visibility: hidden;    
+}
+.label-nota-nps:hover{
+    cursor:pointer;
+}
+.label-nota-nps-selecionado{
+    border: 5px solid lightgrey;
+}
+.div-agradecimento-nps{
+    text-align: center;
+}
+#cadastro-aluno,#cadastro-funcionario{
+    display: none;
+}
+.ui-autocomplete{
+    min-width: 500px;
+    max-height: 175px;
+    overflow-y: auto;
+}
+.row-spinner-enviar-email{
+    display:none;
 }

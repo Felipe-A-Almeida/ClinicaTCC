@@ -13,7 +13,7 @@ require_once DIR."includes/header/header.php";
                 <div class="separador"></div>
                 <form method="POST" action="<?= URL_BASE ?>controler/controler.php" class="formulario-login-admin">
                     <div class="row form-group">
-                        <input type="text" name="email" id="email" class="form-control campo-formulario campo-texto " placeholder="Digite seu email">
+                        <input type="text" name="codigo" id="codigo" class="form-control campo-formulario campo-texto " placeholder="Digite seu código">
                     </div>
                     <div class="row form-group">
                         <input type="password" name="senha" id="senha" class="form-control campo-senha campo-formulario campo-texto" placeholder="Digite sua Senha">

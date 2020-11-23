@@ -8,7 +8,7 @@
                 <a href="dados.php">
                     <li class="menu-item">Dados pessoais</li>
                 </a>      
-                <a href="sair.php">          
+                <a href="#" id="link-sair">          
                     <li class="menu-item">                
                         Sair
                     </li>

@@ -62,20 +62,36 @@ class Consulta{
     }
 
     public function cadastrarConsulta($db){
-        $query = "INSERT INTO `consulta` (`idUsuario`,`idAluno`,`idAdm`,`data_inicio`,`data_fim`,`idTipoConsulta`,`resultado`) VALUES ('{$this->getIdUsuario()}','{$this->getIdAluno()}','{$this->getIdAdm()}','{$this->getDataInicio()}','{$this->getDataFim()}','{$this->getIdTipoConsulta()}','')";
+        $query = "INSERT INTO `consulta` (`idUsuario`,`idAluno`,`idAdm`,`data_inicio`,`data_fim`,`idTipoConsulta`) VALUES ('{$this->getIdUsuario()}','{$this->getIdAluno()}','{$this->getIdAdm()}','{$this->getDataInicio()}','{$this->getDataFim()}','{$this->getIdTipoConsulta()}')";
         echo $query;
         $db->inserir($query,$db);
     }
     public function editarConsulta($db){
-        $query = "UPDATE `consulta` SET `idUsuario`='{$this->getIdUsuario()}',`idAluno` = '{$this->getIdAluno()}',`idAdm` ='{$this->getIdAdm()}',`data_inicio` = '{$this->getDataInicio()}',`data_fim` = '{$this->getDataFim()}',`idTipoConsulta` = '{$this->getIdTipoConsulta()}',`resultado` = '' WHERE `id` = '{$this->getId()}'";
-        echo $query;
+        $query = "UPDATE `consulta` SET `idUsuario`='{$this->getIdUsuario()}',`idAluno` = '{$this->getIdAluno()}',`idAdm` ='{$this->getIdAdm()}',`data_inicio` = '{$this->getDataInicio()}',`data_fim` = '{$this->getDataFim()}',`idTipoConsulta` = '{$this->getIdTipoConsulta()}' WHERE `id` = '{$this->getId()}'";
         $db->inserir($query,$db);
     }
     public function excluirConsulta($db){
-        $query = "DELETE  FROM `consulta` WHERE `id` = '{$this->getId()}'";
-        echo $query;
+        $query = "DELETE FROM `consulta` WHERE `id` = '{$this->getId()}'";
         $db->inserir($query,$db);
     }
+    public function buscaId($db){
+        $query = "SELECT `id` FROM `consulta` WHERE `idUsuario` = {$this->getIdUsuario()} ORDER BY `id` DESC LIMIT 1";
+        $result = $db->consultar($query,$db);
+        $ln = $result->fetch_assoc();
+        $this->setId($ln['id']);
+    }
+    public function buscaAnamnese($clinica,$db){
+        if($clinica == "fisioterapia") $tabela = "anamnesefisio"; else $tabela = "anamneseenfermagem";
+        $query = "SELECT `id` FROM `$tabela` WHERE `idUsuario` = {$this->getIdUsuario()}";
+        if($result = $db->consultar($query,$db)){
+            if($result->num_rows > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
     
 }
 

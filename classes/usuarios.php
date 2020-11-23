@@ -22,8 +22,9 @@ class Usuario{
     private $numero;
     private $sexo;
     private $estadoCivil;
+    private $token;
 
-    function __construct($id,$nome,$rg,$cpf,$data_nascimento,$naturalidade,$telefone,$nomePai,$nomeMae,$cartaoSUS,$profissao,$tempoServico,$email,$senha,$numero,$complemento,$cep,$logradouro,$bairro,$cidade,$estado,$estadoCivil,$sexo){
+    function __construct($id,$nome,$rg,$cpf,$data_nascimento,$naturalidade,$telefone,$nomePai,$nomeMae,$cartaoSUS,$profissao,$tempoServico,$email,$senha,$numero,$complemento,$cep,$logradouro,$bairro,$cidade,$estado,$estadoCivil,$sexo,$token){
         if($id != "") { $this->id = $id; };
         $this->nome = $nome;
         $this->rg = $this->limpaString($rg);
@@ -47,6 +48,7 @@ class Usuario{
         $this->numero = $numero;
         $this->sexo = $sexo;
         $this->complemento = $complemento;
+        $this->token = $token;
     }
     public function getId(){
         return $this->id;
@@ -186,13 +188,25 @@ class Usuario{
     public function setSexo($sexo){
         $this->sexo = $sexo;
     }
+    public function getToken(){
+        return $this->token;
+    }
+    public function setToken($token){
+        $this->token = $token;
+    }
+    public function gera_token($tamanho){   
+        $regex = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+        return substr(str_shuffle($regex),0, $tamanho); 
+    } 
     public function cadastrar($db){
-        $query = "INSERT INTO `usuario` (`nome`,`rg`,`cpf`,`cep`,`logradouro`,`bairro`,`cidade`,`estado`,`complemento`,`naturalidade`,`telefone`,`nomeMae`,`nomePai`,`dataNascimento`,`cartaoSUS`,`profissao`,`tempoServico`,`senha`,`email`,`numero`,`sexo`,`estadoCivil`) VALUES ('{$this->getNome()}','{$this->getRG()}','{$this->getCPF()}','{$this->getCEP()}','{$this->getLogradouro()}','{$this->getBairro()}','{$this->getCidade()}','{$this->getEstado()}','{$this->getComplemento()}','{$this->getNaturalidade()}','{$this->getTelefone()}','{$this->getNomeMae()}','{$this->getNomePai()}','{$this->getDataNascimento()}','{$this->getCartaoSUS()}','{$this->getProfissao()}','{$this->getTempoServico()}','{$this->getSenha()}','{$this->getEmail()}','{$this->getNumero()}','{$this->getSexo()}','{$this->getEstadoCivil()}')";
+        $this->token = $this->gera_token(35);
+        $query = "INSERT INTO `usuario` (`nome`,`rg`,`cpf`,`cep`,`logradouro`,`bairro`,`cidade`,`estado`,`complemento`,`naturalidade`,`telefone`,`nomeMae`,`nomePai`,`dataNascimento`,`cartaoSUS`,`profissao`,`tempoServico`,`senha`,`email`,`numero`,`sexo`,`estadoCivil`,`token`) VALUES ('{$this->getNome()}','{$this->getRG()}','{$this->getCPF()}','{$this->getCEP()}','{$this->getLogradouro()}','{$this->getBairro()}','{$this->getCidade()}','{$this->getEstado()}','{$this->getComplemento()}','{$this->getNaturalidade()}','{$this->getTelefone()}','{$this->getNomeMae()}','{$this->getNomePai()}','{$this->getDataNascimento()}','{$this->getCartaoSUS()}','{$this->getProfissao()}','{$this->getTempoServico()}','{$this->getSenha()}','{$this->getEmail()}','{$this->getNumero()}','{$this->getSexo()}','{$this->getEstadoCivil()}','{$this->getToken()}')";
         echo $query;
         $db->inserir($query,$db);        
     }
     public function editar($db){
-    $query = "UPDATE `usuario` SET `nome` = '{$this->getNome()}',`rg` = '{$this->getRG()}',`cpf` = '{$this->getCPF()}',`cep` = '{$this->getCEP()}',`logradouro` = '{$this->getLogradouro()}',`bairro` = '{$this->getBairro()}',`cidade` = '{$this->getCidade()}',`estado` = '{$this->getEstado()}',`numero` = '{$this->getNumero()}',`complemento` = '{$this->getComplemento()}',`naturalidade` = '{$this->getNaturalidade()}',`telefone` = '{$this->getTelefone()}',`nomeMae` = '{$this->getNomeMae()}',`nomePai` = '{$this->getNomePai()}',`dataNascimento` = '{$this->getDataNascimento()}',`cartaoSUS` = '{$this->getCartaoSUS()}',`profissao` = '{$this->getProfissao()}',`tempoServico` = '{$this->getTempoServico()}',`email` = '{$this->getEmail()}',`numero` = '{$this->getNumero()}',`sexo` = '{$this->getSexo()}',`estadoCivil` = '{$this->getEstadoCivil()}' WHERE `id` = {$this->getId()}";
+        $query = "UPDATE `usuario` SET `nome` = '{$this->getNome()}',`rg` = '{$this->getRG()}',`cpf` = '{$this->getCPF()}',`cep` = '{$this->getCEP()}',`logradouro` = '{$this->getLogradouro()}',`bairro` = '{$this->getBairro()}',`cidade` = '{$this->getCidade()}',`estado` = '{$this->getEstado()}',`numero` = '{$this->getNumero()}',`complemento` = '{$this->getComplemento()}',`naturalidade` = '{$this->getNaturalidade()}',`telefone` = '{$this->getTelefone()}',`nomeMae` = '{$this->getNomeMae()}',`nomePai` = '{$this->getNomePai()}',`dataNascimento` = '{$this->getDataNascimento()}',`cartaoSUS` = '{$this->getCartaoSUS()}',`profissao` = '{$this->getProfissao()}',`tempoServico` = '{$this->getTempoServico()}',`email` = '{$this->getEmail()}',`numero` = '{$this->getNumero()}',`sexo` = '{$this->getSexo()}',`estadoCivil` = '{$this->getEstadoCivil()}' WHERE `id` = {$this->getId()}";
+        echo $query;
         $db->editar($query,$db);
     }
     public function limpaString($valor){
@@ -217,7 +231,8 @@ class Usuario{
         $tempo_maximo = 1800;
         if((isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempo_maximo)) || !(isset($_SESSION['id']))){
             session_unset(); 
-            session_destroy();
+            session_destroy();            
+            print_r($_SESSION);
             header("LOCATION: ".URL_BASE);
         }else{    
             $this->setId($_SESSION['id']);
@@ -251,7 +266,13 @@ class Usuario{
             $this->setEmail($ln['email']);
             $this->setSexo($ln['sexo']);
             $this->setEstadoCivil($ln['estadoCivil']);
+            $this->setToken($ln['TOKEN']);
         }
+    }
+    public function alteraSenha($senha,$db){
+        $senha_encrypt = md5($senha);
+        $query = "UPDATE `usuario` SET `senha` = '{$senha_encrypt}' WHERE `id` = {$this->getId()}";
+        $db->editar($query,$db);
     }
 }
 ?>

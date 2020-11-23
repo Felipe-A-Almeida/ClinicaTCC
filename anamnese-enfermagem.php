@@ -3,9 +3,19 @@ require_once "init.php";
 require_once DIR."includes/header/header.php"; 
 require_once DIR."/classes/DB.php";
 require_once DIR."/classes/usuarios.php";
-$usuario = new Usuario("","","","","","","","","","","","","","","","","","","","","","","");
+$usuario = new Usuario("","","","","","","","","","","","","","","","","","","","","","","","");
 $usuario->validaSessao($db);
 $id_usuario=$_SESSION['id'];
+if(isset($_GET['id'])){
+    $idConsulta=$_GET['id'];
+    echo "a";
+}else{
+    $query = "SELECT MAX(`id`) AS `id_consulta` FROM `consulta` WHERE `idUsuario` = '$id_usuario'";
+    $result = $db->consultar($query,$db);
+    if($ln = $result->fetch_assoc()){
+        $idConsulta = $ln['id_consulta'];
+    }
+}
 
 
 ?>
@@ -17,6 +27,16 @@ $id_usuario=$_SESSION['id'];
                 <h1 class="tituloColorido">Ficha de Pré-Avaliação</h1>
                 <span class="tipo-clinica">Enfermagem</span>
             </div>
+        </div>
+    </div>
+    <div class="separador"></div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <a href="http://localhost/clinicaTcc/main.php?clinica=enfermagem">
+                <button class="btn btn-primary botao">
+                    Voltar
+                </button>
+            </a>            
         </div>
     </div>
     <div class="separador"></div>
@@ -46,11 +66,11 @@ $id_usuario=$_SESSION['id'];
                 <div class="col-sm-12 col-md-12 col-lg-12">  
                     <label for="doenca">Possui Alguma Doença:</label>
                     <br>
-                    <input type="checkbox" name="doenca" id="doenca" value="cardiopatia">Cardiopatia
-                    <input type="checkbox" name="doenca" id="doenca" value="hipertensao">Hipertensão
-                    <input type="checkbox" name="doenca" id="doenca" value="diabetes">Diabetes
-                    <input type="checkbox" name="doenca" id="doenca" value="cancer">Câncer
-                    <input type="checkbox" name="doenca" id="doenca" value="outros">Outros<input type="text" name="desc-doencas" id="desc-doencas" class="form-control desc-doencas">
+                    <input type="checkbox" name="doenca[]" id="doenca" value="cardiopatia">Cardiopatia
+                    <input type="checkbox" name="doenca[]" id="doenca" value="hipertensao">Hipertensão
+                    <input type="checkbox" name="doenca[]" id="doenca" value="diabetes">Diabetes
+                    <input type="checkbox" name="doenca[]" id="doenca" value="cancer">Câncer
+                    <input type="checkbox" name="doenca[]" id="doenca" value="outros">Outros<input type="text" name="desc-doencas" id="desc-doencas" class="form-control desc-doencas">
                 </div>                
             </div>
             <div class="row form-group"> 
@@ -160,6 +180,7 @@ $id_usuario=$_SESSION['id'];
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <input type="hidden" name="acao" id="acao" value="cadastrar-anamnese-enfermagem">
                     <input type="hidden" name="idUsuario" id="idUsuario" value="<?php echo $usuario->getId(); ?>">
+                    <input type="hidden" name="idConsulta" id="idConsulta" value="<?php echo $idConsulta; ?>">
                     <button class="btn btn-primary botao botao-enviar-cadastro">Cadastrar</button>
                 </div>                
             </div> 
